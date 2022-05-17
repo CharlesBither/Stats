@@ -7,9 +7,9 @@ public class UserCheck {
 
     Database database = new Database();
 
-    public boolean hasData(String uuid) {
+    public boolean hasData(String uuid, String tableName) {
         try (Connection connection = database.getPool().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT id FROM stats WHERE uuid = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT id FROM " + tableName + " WHERE uuid = ?")) {
             statement.setString(1, uuid);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

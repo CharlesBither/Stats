@@ -39,7 +39,7 @@ public class MineStats {
                 list.add(gold);
                 list.add(iron);
 
-                if (userCheck.hasData(uuid)) {
+                if (userCheck.hasData(uuid, "mine")) {
                     try (Connection connection = database.getPool().getConnection();
                          PreparedStatement statement = connection.prepareStatement(
                                  "UPDATE mine SET " +
@@ -48,12 +48,14 @@ public class MineStats {
                                          "copper = ?, " +
                                          "gold = ?, " +
                                          "iron = ? " +
-                                         "WHERE uuid = '" + uuid + "'")) {
+                                         "WHERE uuid = ?")) {
 
                         for(int i = 0; i < list.size(); i++) {
                             statement.setInt(i + 1, list.get(i));
                         }
+                        statement.setString(list.size() + 1, uuid);
                         statement.executeUpdate();
+                        Bukkit.getLogger().info("updated mining stats");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -62,7 +64,7 @@ public class MineStats {
                          PreparedStatement statement = connection.prepareStatement(
                                  "INSERT INTO mine " +
                                          "(gamertag, uuid, diamond, emerald, copper, gold, iron) VALUES " +
-                                         "(?,?,?,?,?,?,?")) {
+                                         "(?,?,?,?,?,?,?)")) {
 
                         statement.setString(1, gamertag);
                         statement.setString(2, uuid);
@@ -71,6 +73,7 @@ public class MineStats {
                             statement.setInt(i + 3, list.get(i));
                         }
                         statement.executeUpdate();
+                        Bukkit.getLogger().info("created mining stats");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

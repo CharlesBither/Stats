@@ -1,22 +1,8 @@
 package tech.secretgarden.stats;
 
-import com.google.common.collect.ImmutableList;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Statistic;
-import org.bukkit.Tag;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public final class Stats extends JavaPlugin {
 
@@ -42,10 +28,11 @@ public final class Stats extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
-        if (getConfig().getString("HOST") != null && getConfig().getString("DROPLET_HOST") != null) {
+        if (getConfig().getString("HOST") != null) {
             try {
                 getDbList();
                 Database.connect();
+                getLogger().info("Connected to droplet");
             } catch (SQLException e) {
                 e.printStackTrace();
             }

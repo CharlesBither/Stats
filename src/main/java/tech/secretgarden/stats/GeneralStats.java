@@ -66,7 +66,7 @@ public class GeneralStats {
                 list.add(rest);
 
 
-                if (userCheck.hasData(uuid)) {
+                if (userCheck.hasData(uuid, "general")) {
                     try (Connection connection = database.getPool().getConnection();
                          PreparedStatement statement = connection.prepareStatement(
                                  "UPDATE general SET " +
@@ -85,12 +85,14 @@ public class GeneralStats {
                                          "trades = ?, " +
                                          "death = ?, " +
                                          "rest = ?" +
-                                 " WHERE uuid = '" + uuid + "'")) {
+                                 " WHERE uuid = ?")) {
 
                         for(int i = 0; i < list.size(); i++) {
                             statement.setInt(i + 1, list.get(i));
                         }
+                        statement.setString(list.size() + 1, uuid);
                         statement.executeUpdate();
+                        Bukkit.getLogger().info("updated general stats");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -99,16 +101,19 @@ public class GeneralStats {
                          PreparedStatement statement = connection.prepareStatement(
                                  "INSERT INTO general " +
                                          "(gamertag, uuid, breed, hours, death_count, damage_dealt, damage_taken, fish, fall, " +
-                                         "fly, walk, enchants, jump, raid, trades, death, rest) VALUES " +
-                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?")) {
+                                         "fly, walk, enchants, jump, raid, trades, death, rest, user_key) VALUES " +
+                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
                         statement.setString(1, gamertag);
                         statement.setString(2, uuid);
 
                         for(int i = 0; i < list.size(); i++) {
                             statement.setInt(i + 3, list.get(i));
+                            System.out.println((i + 3) + " " + list.get(i));
                         }
+
                         statement.executeUpdate();
+                        Bukkit.getLogger().info("created general stats");
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
