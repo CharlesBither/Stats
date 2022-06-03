@@ -44,10 +44,10 @@ public class GeneralStats {
 
                 int raid = player.getStatistic(Statistic.RAID_WIN);
                 int trades = player.getStatistic(Statistic.TRADED_WITH_VILLAGER);
-                long deathTime = player.getStatistic(Statistic.TIME_SINCE_DEATH);
-                int death = (int) (((deathTime / 20) / 60) / 60);
-                long restTime = player.getStatistic(Statistic.TIME_SINCE_REST);
-                int rest = (int) (((restTime / 20) / 60) / 60);
+                int deathTime = player.getStatistic(Statistic.TIME_SINCE_DEATH);
+                int death = (deathTime / 20) / 60;
+                int restTime = player.getStatistic(Statistic.TIME_SINCE_REST);
+                int rest = (restTime / 20) / 60;
 
                 list.add(breed);
                 list.add(hours);
@@ -101,8 +101,8 @@ public class GeneralStats {
                          PreparedStatement statement = connection.prepareStatement(
                                  "INSERT INTO general " +
                                          "(gamertag, uuid, breed, hours, death_count, damage_dealt, damage_taken, fish, fall, " +
-                                         "fly, walk, enchants, jump, raid, trades, death, rest, user_key) VALUES " +
-                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+                                         "fly, walk, enchants, jump, raid, trades, death, rest) VALUES " +
+                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
                         statement.setString(1, gamertag);
                         statement.setString(2, uuid);
@@ -111,7 +111,6 @@ public class GeneralStats {
                             statement.setInt(i + 3, list.get(i));
                             System.out.println((i + 3) + " " + list.get(i));
                         }
-
                         statement.executeUpdate();
                         Bukkit.getLogger().info("created general stats");
                     } catch (SQLException e) {
