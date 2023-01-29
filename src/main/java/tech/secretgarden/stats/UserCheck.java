@@ -1,7 +1,10 @@
 package tech.secretgarden.stats;
 
-import java.sql.*;
-import java.time.LocalDateTime;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserCheck {
 

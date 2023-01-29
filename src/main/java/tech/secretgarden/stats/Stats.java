@@ -7,9 +7,7 @@ import java.util.ArrayList;
 public final class Stats extends JavaPlugin {
 
     Database database = new Database();
-    GeneralStats generalStats = new GeneralStats();
-    KillStats killStats = new KillStats();
-    MineStats mineStats = new MineStats();
+    DBTables dbTables = new DBTables();
 
     public static ArrayList<String> dbList = new ArrayList<>();
     public ArrayList<String> getDbList() {
@@ -39,9 +37,13 @@ public final class Stats extends JavaPlugin {
         }
 
         getLogger().info("Stats plugin has loaded");
-        generalStats.updateOnlinePlayers.runTaskTimer(this, 20, 20 * 60 * 5);
-        killStats.updateOnlinePlayers.runTaskTimer(this, 20 * 60, 20 * 60 * 5);
-        mineStats.updateOnlinePlayers.runTaskTimer(this, 20 * 60 * 2, 20 * 60 * 5);
+
+        // init a HashMap to hold all players as keys and a hashmap of <statName, data> as the values.
+        PlayerMap.initPlayerMap();
+
+        // run tasks every 5 minutes
+        PlayerMap.updatePlayerMap.runTaskTimer(this, 20 * 20, 20 * 60 * 5);             // get stats
+        dbTables.updateStats.runTaskTimerAsynchronously(this, 20 * 30, 20 * 60 * 5);    // update DB
     }
 
     @Override

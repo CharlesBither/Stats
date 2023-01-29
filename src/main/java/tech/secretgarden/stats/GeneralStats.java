@@ -49,74 +49,74 @@ public class GeneralStats {
                 int restTime = player.getStatistic(Statistic.TIME_SINCE_REST);
                 int rest = (restTime / 20) / 60;
 
-                list.add(breed);
-                list.add(hours);
-                list.add(deathCount);
-                list.add(damageDealt);
-                list.add(damageTaken);
-                list.add(fish);
-                list.add(fall);
-                list.add(fly);
-                list.add(walk);
-                list.add(enchants);
-                list.add(jump);
-                list.add(raid);
-                list.add(trades);
-                list.add(death);
-                list.add(rest);
-
-
-                if (userCheck.hasData(uuid, "general")) {
-                    try (Connection connection = database.getPool().getConnection();
-                         PreparedStatement statement = connection.prepareStatement(
-                                 "UPDATE general SET " +
-                                         "breed = ?, " +
-                                         "hours = ?, " +
-                                         "death_count = ?, " +
-                                         "damage_dealt = ?, " +
-                                         "damage_taken = ?, " +
-                                         "fish = ?, " +
-                                         "fall = ?, " +
-                                         "fly = ?, " +
-                                         "walk = ?, " +
-                                         "enchants = ?, " +
-                                         "jump = ?, " +
-                                         "raid = ?, " +
-                                         "trades = ?, " +
-                                         "death = ?, " +
-                                         "rest = ?" +
-                                 " WHERE uuid = ?")) {
-
-                        for(int i = 0; i < list.size(); i++) {
-                            statement.setInt(i + 1, list.get(i));
-                        }
-                        statement.setString(list.size() + 1, uuid);
-                        statement.executeUpdate();
-                        Bukkit.getLogger().info("updated general stats");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try (Connection connection = database.getPool().getConnection();
-                         PreparedStatement statement = connection.prepareStatement(
-                                 "INSERT INTO general " +
-                                         "(gamertag, uuid, breed, hours, death_count, damage_dealt, damage_taken, fish, fall, " +
-                                         "fly, walk, enchants, jump, raid, trades, death, rest) VALUES " +
-                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
-
-                        statement.setString(1, gamertag);
-                        statement.setString(2, uuid);
-
-                        for(int i = 0; i < list.size(); i++) {
-                            statement.setInt(i + 3, list.get(i));
-                            System.out.println((i + 3) + " " + list.get(i));
-                        }
-                        statement.executeUpdate();
-                        Bukkit.getLogger().info("created general stats");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
+//                list.add(breed);
+//                list.add(hours);
+//                list.add(deathCount);
+//                list.add(damageDealt);
+//                list.add(damageTaken);
+//                list.add(fish);
+//                list.add(fall);
+//                list.add(fly);
+//                list.add(walk);
+//                list.add(enchants);
+//                list.add(jump);
+//                list.add(raid);
+//                list.add(trades);
+//                list.add(death);
+//                list.add(rest);
+//
+//
+//                if (userCheck.hasData(uuid, "general")) {
+//                    try (Connection connection = database.getPool().getConnection();
+//                         PreparedStatement statement = connection.prepareStatement(
+//                                 "UPDATE general SET " +
+//                                         "breed = ?, " +
+//                                         "hours = ?, " +
+//                                         "death_count = ?, " +
+//                                         "damage_dealt = ?, " +
+//                                         "damage_taken = ?, " +
+//                                         "fish = ?, " +
+//                                         "fall = ?, " +
+//                                         "fly = ?, " +
+//                                         "walk = ?, " +
+//                                         "enchants = ?, " +
+//                                         "jump = ?, " +
+//                                         "raid = ?, " +
+//                                         "trades = ?, " +
+//                                         "death = ?, " +
+//                                         "rest = ?" +
+//                                 " WHERE uuid = ?")) {
+//
+//                        for(int i = 0; i < list.size(); i++) {
+//                            statement.setInt(i + 1, list.get(i));
+//                        }
+//                        statement.setString(list.size() + 1, uuid);
+//                        statement.executeUpdate();
+//                        Bukkit.getLogger().info("updated general stats");
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    try (Connection connection = database.getPool().getConnection();
+//                         PreparedStatement statement = connection.prepareStatement(
+//                                 "INSERT INTO general " +
+//                                         "(gamertag, uuid, breed, hours, death_count, damage_dealt, damage_taken, fish, fall, " +
+//                                         "fly, walk, enchants, jump, raid, trades, death, rest) VALUES " +
+//                                         "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+//
+//                        statement.setString(1, gamertag);
+//                        statement.setString(2, uuid);
+//
+//                        for(int i = 0; i < list.size(); i++) {
+//                            statement.setInt(i + 3, list.get(i));
+//                            System.out.println((i + 3) + " " + list.get(i));
+//                        }
+//                        statement.executeUpdate();
+//                        Bukkit.getLogger().info("created general stats");
+//                    } catch (SQLException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
 
 
             }
