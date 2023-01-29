@@ -176,8 +176,8 @@ public class DBTables {
 
         int[] mineStats = new int[5];
         mineStats[0] = statMap.get(ColNames.DIAMOND);
-        mineStats[1] = statMap.get(ColNames.COPPER);
-        mineStats[2] = statMap.get(ColNames.EMERALD);
+        mineStats[1] = statMap.get(ColNames.EMERALD);
+        mineStats[2] = statMap.get(ColNames.COPPER);
         mineStats[3] = statMap.get(ColNames.GOLD);
         mineStats[4] = statMap.get(ColNames.IRON);
 
