@@ -78,7 +78,7 @@ public class DBTables {
                 }
                 statement.setString(16, uuid);
                 statement.executeUpdate();
-                Bukkit.getLogger().info("updated general stats");
+//                Bukkit.getLogger().info("updated general stats");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -142,7 +142,7 @@ public class DBTables {
                 }
                 statement.setString(10, uuid);
                 statement.executeUpdate();
-                Bukkit.getLogger().info("updated kills stats");
+//                Bukkit.getLogger().info("updated kills stats");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -199,7 +199,7 @@ public class DBTables {
                 }
                 statement.setString(6, uuid);
                 statement.executeUpdate();
-                Bukkit.getLogger().info("updated mine stats");
+//                Bukkit.getLogger().info("updated mine stats");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
